@@ -96,7 +96,7 @@ in  upstream
           , "variant-encodings"
           ]
       , repo =
-          "https://github.com/thought2/purescript-marked.git"
+          "ssh://git@github.com/thought2/purescript-marked.git"
       , version =
           "main"
       }
