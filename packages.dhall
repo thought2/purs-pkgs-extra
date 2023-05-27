@@ -152,7 +152,7 @@ in  upstream
       { dependencies =
           [ "console", "effect", "either", "marked", "maybe", "prelude", "virtual-dom" ]
       , repo =
-          "ssh://git@github.com/thought2/markdown-to-virtual-dom.git"
+          "ssh://git@github.com/thought2/purescript-markdown-to-virtual-dom.git"
       , version =
           "main"
       }
