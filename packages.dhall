@@ -147,3 +147,14 @@ in  upstream
       , version =
           "literals"
       }
+
+  with markdown-to-virtual-dom =
+      { dependencies =
+          [ "console", "effect", "either", "marked", "maybe", "prelude", "virtual-dom" ]
+      , repo =
+          "ssh://git@github.com/thought2/markdown-to-virtual-dom.git"
+      , version =
+          "main"
+      }
+
+
