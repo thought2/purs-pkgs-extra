@@ -37,7 +37,7 @@ with virtual-dom-halogen =
 with marked =
   { repo = "ssh://git@github.com/thought2/purescript-marked.git"
   , version = "e24aaad3b8dbf13e325abe87ef2d418e38e6e2a2"
-  , dependencies = [ "console", "dts", "effect", "either", "maybe", "newtype", "nullable", "prelude", "unsafe-coerce", "untagged-union", "variant", "variant-encodings" ]
+  , dependencies = [ "console", "dts", "effect", "either", "maybe", "newtype", "nullable", "prelude", "unsafe-coerce", "untagged-union", "variant", "variant-encodings", "ts-bridge" ]
   }
 
 
