@@ -2,6 +2,8 @@ import * as dotenv from "dotenv";
 import cp from "child_process";
 import fetch from "node-fetch";
 
+dotenv.config();
+
 type Repo = {
   user: string;
   repoName: string;
@@ -24,11 +26,15 @@ const getLatestCommit = async (repo: Repo): Promise<string> => {
   const url = `https://api.github.com/repos/${repo.user}/${repo.repoName}/commits/${repo.rev}`;
   const res = await fetch(url, {
     headers: repo.private
-      ? { authorization: `token ${process.env.GH_API_TOKEN}` }
+      ? { authorization: `token ${process.env.GITHUB_TOKEN}` }
       : {},
   });
-  const json = await res.json();
-  return (json as { sha: string }).sha;
+  if (res.status === 200) {
+    const json = await res.json();
+    return (json as { sha: string }).sha;
+  } else {
+    throw new Error(`Failed to get latest commit: ${res.status}`);
+  }
 };
 
 const pkgsEntriesToDhall = (entries: PkgEntry[]): string => {
@@ -90,10 +96,11 @@ const runCommand = async (args: CommandArgs) => {
 };
 
 const dhallToJson = async (dhall: string): Promise<unknown> => {
+  
   const res = await runCommand({
     command: "dhall-to-json",
     args: [],
-    stdin: dhall,
+    stdin: dhall.replace(/\.\/packages\.dhall/, "{ = }"),
   });
   return JSON.parse(res);
 };
@@ -108,8 +115,13 @@ const getGithubRawUserContent = async (
       ? { authorization: `token ${process.env.GITHUB_TOKEN}` }
       : {},
   });
-  const text = await res.text();
-  return text;
+
+  if (res.status === 200) {
+    const text = await res.text();
+    return text;
+  } else {
+    throw new Error(`Failed to get latest commit: ${res.status}`);
+  }
 };
 
 const repoToString = (repo: Repo): string => {
@@ -157,15 +169,15 @@ const getPackagesDhall = async (repos: Repo[]): Promise<string> => {
 
 const main = async () => {
   const repos: Repo[] = [
-    // { user: "thought2", repoName: "virtual-dom", rev: "main" },
-    // { user: "thought2", repoName: "virtual-dom-react-basic", rev: "main" },
-    // { user: "thought2", repoName: "data-mvc", rev: "main" },
-    // { user: "thought2", repoName: "virtual-dom-halogen", rev: "main" },
-
+    { user: "thought2", repoName: "virtual-dom", rev: "main" },
+    { user: "thought2", repoName: "virtual-dom-react-basic", rev: "main" },
+    { user: "thought2", repoName: "data-mvc", rev: "main" },
+    { user: "thought2", repoName: "virtual-dom-halogen", rev: "main" },
     { user: "thought2", repoName: "marked", rev: "main", private: true },
-    // { user: "thought2", repoName: "variant-encodings", rev: "main" },
-    // { user: "thought2", repoName: "ts-bridge", rev: "main" },
-    // { user: "thought2", repoName: "markdown-to-virtual-dom", rev: "main" },
+    { user: "thought2", repoName: "variant-encodings", rev: "main" },
+    { user: "thought2", repoName: "ts-bridge", rev: "main" },
+    { user: "thought2", repoName: "markdown-to-virtual-dom", rev: "main", private: true },
+  
   ];
 
   const pkgsDhall = await getPackagesDhall(repos);
@@ -173,4 +185,4 @@ const main = async () => {
   console.log(pkgsDhall);
 };
 
-// main();
+main();

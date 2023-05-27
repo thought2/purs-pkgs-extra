@@ -1,3 +1,3 @@
 gen-pkgs:
     tsc
-    node dist/gen.js > packages2.dhall
+    node dist/gen.js > packages.dhall
