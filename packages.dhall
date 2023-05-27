@@ -1,6 +1,7 @@
+
 let upstream =
-      https://github.com/purescript/package-sets/releases/download/psc-0.15.8-20230517/packages.dhall
-        sha256:8b94a0cd7f86589a6bd06d48cb9a61d69b66a94b668657b2f10c8b14c16e028c
+  https://github.com/purescript/package-sets/releases/download/psc-0.15.8-20230517/packages.dhall
+    sha256:8b94a0cd7f86589a6bd06d48cb9a61d69b66a94b668657b2f10c8b14c16e028c
 
 in upstream
 
@@ -34,7 +35,7 @@ with virtual-dom-halogen =
 
 
 with marked =
-  { repo = "ssh://git@github/thought2/purescript-marked.git"
+  { repo = "ssh://git@github.com/thought2/purescript-marked.git"
   , version = "e24aaad3b8dbf13e325abe87ef2d418e38e6e2a2"
   , dependencies = [ "console", "dts", "effect", "either", "maybe", "newtype", "nullable", "prelude", "unsafe-coerce", "untagged-union", "variant", "variant-encodings" ]
   }
@@ -55,7 +56,7 @@ with ts-bridge =
 
 
 with markdown-to-virtual-dom =
-  { repo = "ssh://git@github/thought2/purescript-markdown-to-virtual-dom.git"
+  { repo = "ssh://git@github.com/thought2/purescript-markdown-to-virtual-dom.git"
   , version = "c2b464b5467dedad937df7e2a5e4f55611bcc79a"
   , dependencies = [ "console", "effect", "either", "marked", "maybe", "prelude", "virtual-dom" ]
   }

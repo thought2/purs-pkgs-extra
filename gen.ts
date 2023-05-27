@@ -39,7 +39,9 @@ const getLatestCommit = async (repo: Repo): Promise<string> => {
 
 const pkgsEntriesToDhall = (entries: PkgEntry[]): string => {
   return `
-let upstream = https://github.com/purescript/package-sets/releases/download/psc-0.15.8-20230430/packages.dhall
+let upstream =
+  https://github.com/purescript/package-sets/releases/download/psc-0.15.8-20230517/packages.dhall
+    sha256:8b94a0cd7f86589a6bd06d48cb9a61d69b66a94b668657b2f10c8b14c16e028c
 
 in upstream
 
@@ -127,7 +129,7 @@ const getGithubRawUserContent = async (
 const repoToString = (repo: Repo): string => {
   const { user, repoName } = repo;
   if (repo.private) {
-    return `ssh://git@github/${user}/${repoName}.git`;
+    return `ssh://git@github.com/${user}/${repoName}.git`;
   } else {
     return `https://github.com/${user}/${repoName}.git`;
   }
