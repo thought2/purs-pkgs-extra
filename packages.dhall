@@ -94,6 +94,7 @@ in  upstream
           , "untagged-union"
           , "variant"
           , "variant-encodings"
+          , "ts-bridge"
           ]
       , repo =
           "ssh://git@github.com/thought2/purescript-marked.git"
