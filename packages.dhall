@@ -79,3 +79,25 @@ in  upstream
       , version =
           "main"
       }
+
+  with marked =
+      { dependencies =
+          [ "console"
+          , "dts"
+          , "effect"
+          , "either"
+          , "maybe"
+          , "newtype"
+          , "nullable"
+          , "prelude"
+          , "unsafe-coerce"
+          , "untagged-union"
+          , "variant"
+          , "variant-encodings"
+          ]
+      , repo =
+          "https://github.com/thought2/purescript-marked.git"
+      , version =
+          "main"
+      }
+
