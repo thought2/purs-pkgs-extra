@@ -49,7 +49,7 @@ ${entries.map(pkgsEntryToDhall).join("\n")}
 
 const pkgsEntryToDhall = (entry: PkgEntry): string => {
   const { repo, version, dependencies } = entry;
-  const deps = dependencies.join(", ");
+  const deps = dependencies.map(dep => `"${dep}"`).join(", ");
 
   return `
 with ${entry.name} =
