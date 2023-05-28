@@ -43,7 +43,7 @@ with marked =
 
 with variant-encodings =
   { repo = "https://github.com/thought2/purescript-variant-encodings.git"
-  , version = "4a2836f512d85953791deb7872810fcabc874d86"
+  , version = "a272b390319b4d3d6fdee3f71160cc62e84f45ba"
   , dependencies = [ "prelude", "unsafe-coerce", "variant" ]
   }
 
