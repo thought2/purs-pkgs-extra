@@ -50,8 +50,8 @@ with variant-encodings =
 
 with ts-bridge =
   { repo = "https://github.com/thought2/purescript-ts-bridge.git"
-  , version = "9886f623e39127d7ec7a6a675010213a8ab4c596"
-  , dependencies = [ "aff", "aff-promise", "arrays", "console", "dts", "effect", "either", "exceptions", "foldable-traversable", "literals", "maybe", "newtype", "node-buffer", "node-fs", "node-fs-aff", "node-path", "node-process", "nullable", "optparse", "ordered-collections", "ordered-set", "prelude", "record", "safe-coerce", "strings", "transformers", "tuples", "untagged-union", "variant", "variant-encodings" ]
+  , version = "e60e4cc5886029db4e70054ba5bb7258d0978648"
+  , dependencies = [ "aff", "aff-promise", "arrays", "console", "dts", "effect", "either", "foldable-traversable", "literals", "maybe", "newtype", "node-buffer", "node-fs", "node-fs-aff", "node-path", "node-process", "nullable", "optparse", "ordered-collections", "ordered-set", "prelude", "record", "safe-coerce", "strings", "transformers", "tuples", "typelevel-prelude", "unsafe-coerce", "untagged-union", "variant", "variant-encodings" ]
   }
 
 
