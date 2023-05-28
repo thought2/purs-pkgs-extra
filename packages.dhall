@@ -55,6 +55,13 @@ with ts-bridge =
   }
 
 
+with dts =
+  { repo = "https://github.com/thought2/purescript-dts.git"
+  , version = "62184ea266bfe6a980471e3e3bf64ff57b19fa7c"
+  , dependencies = [ "arrays", "console", "effect", "maybe", "newtype", "ordered-collections", "ordered-set", "prelude", "tuples" ]
+  }
+
+
 with markdown-to-virtual-dom =
   { repo = "ssh://git@github.com/thought2/purescript-markdown-to-virtual-dom.git"
   , version = "c2b464b5467dedad937df7e2a5e4f55611bcc79a"

@@ -6,6 +6,7 @@
   { "user": "thought2", "repoName": "marked", "rev": "main", "private": true },
   { "user": "thought2", "repoName": "variant-encodings", "rev": "main" },
   { "user": "thought2", "repoName": "ts-bridge", "rev": "recusion" },
+  { "user": "thought2", "repoName": "dts", "rev": "main" },
   {
     "user": "thought2",
     "repoName": "markdown-to-virtual-dom",
