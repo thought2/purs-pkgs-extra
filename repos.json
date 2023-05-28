@@ -1,0 +1,15 @@
+[
+  { "user": "thought2", "repoName": "virtual-dom", "rev": "main" },
+  { "user": "thought2", "repoName": "virtual-dom-react-basic", "rev": "main" },
+  { "user": "thought2", "repoName": "data-mvc", "rev": "main" },
+  { "user": "thought2", "repoName": "virtual-dom-halogen", "rev": "main" },
+  { "user": "thought2", "repoName": "marked", "rev": "main", "private": true },
+  { "user": "thought2", "repoName": "variant-encodings", "rev": "main" },
+  { "user": "thought2", "repoName": "ts-bridge", "rev": "main" },
+  {
+    "user": "thought2",
+    "repoName": "markdown-to-virtual-dom",
+    "rev": "main",
+    "private": true
+  }
+]
