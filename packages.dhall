@@ -36,7 +36,7 @@ with virtual-dom-halogen =
 
 with marked =
   { repo = "ssh://git@github.com/thought2/purescript-marked.git"
-  , version = "e24aaad3b8dbf13e325abe87ef2d418e38e6e2a2"
+  , version = "06651dfa5ae9de5e9bd83e1977d38fa36c8d92c9"
   , dependencies = [ "console", "dts", "effect", "either", "maybe", "newtype", "nullable", "prelude", "unsafe-coerce", "untagged-union", "variant", "variant-encodings", "ts-bridge" ]
   }
 
@@ -50,8 +50,8 @@ with variant-encodings =
 
 with ts-bridge =
   { repo = "https://github.com/thought2/purescript-ts-bridge.git"
-  , version = "afddd6cd876ef1e6819d6024d831db0805de05ea"
-  , dependencies = [ "aff", "aff-promise", "arrays", "console", "dts", "effect", "either", "foldable-traversable", "maybe", "newtype", "node-buffer", "node-fs", "node-fs-aff", "node-path", "node-process", "nullable", "optparse", "ordered-collections", "ordered-set", "prelude", "record", "safe-coerce", "strings", "transformers", "tuples", "untagged-union", "variant", "variant-encodings" ]
+  , version = "9886f623e39127d7ec7a6a675010213a8ab4c596"
+  , dependencies = [ "aff", "aff-promise", "arrays", "console", "dts", "effect", "either", "exceptions", "foldable-traversable", "literals", "maybe", "newtype", "node-buffer", "node-fs", "node-fs-aff", "node-path", "node-process", "nullable", "optparse", "ordered-collections", "ordered-set", "prelude", "record", "safe-coerce", "strings", "transformers", "tuples", "untagged-union", "variant", "variant-encodings" ]
   }
 
 

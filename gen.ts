@@ -1,6 +1,7 @@
 import * as dotenv from "dotenv";
 import cp from "child_process";
 import fetch from "node-fetch";
+import fs from "fs";
 
 dotenv.config();
 
@@ -170,17 +171,7 @@ const getPackagesDhall = async (repos: Repo[]): Promise<string> => {
 };
 
 const main = async () => {
-  const repos: Repo[] = [
-    { user: "thought2", repoName: "virtual-dom", rev: "main" },
-    { user: "thought2", repoName: "virtual-dom-react-basic", rev: "main" },
-    { user: "thought2", repoName: "data-mvc", rev: "main" },
-    { user: "thought2", repoName: "virtual-dom-halogen", rev: "main" },
-    { user: "thought2", repoName: "marked", rev: "main", private: true },
-    { user: "thought2", repoName: "variant-encodings", rev: "main" },
-    { user: "thought2", repoName: "ts-bridge", rev: "main" },
-    { user: "thought2", repoName: "markdown-to-virtual-dom", rev: "main", private: true },
-  
-  ];
+  const repos = JSON.parse(fs.readFileSync("./repos.json", "utf8").toString())
 
   const pkgsDhall = await getPackagesDhall(repos);
 
