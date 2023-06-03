@@ -23,6 +23,8 @@ type SpagoFile = {
   dependencies: string[];
 };
 
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 const getLatestCommit = async (repo: Repo): Promise<string> => {
   const url = `https://api.github.com/repos/${repo.user}/${repo.repoName}/commits/${repo.rev}`;
   const res = await fetch(url, {
@@ -34,7 +36,9 @@ const getLatestCommit = async (repo: Repo): Promise<string> => {
     const json = await res.json();
     return (json as { sha: string }).sha;
   } else {
-    throw new Error(`Failed to get latest commit: ${res.status}`);
+    throw new Error(
+      `Failed to get latest commit: ${url},  ${res.status}, ${res.statusText}`
+    );
   }
 };
 
@@ -52,7 +56,7 @@ ${entries.map(pkgsEntryToDhall).join("\n")}
 
 const pkgsEntryToDhall = (entry: PkgEntry): string => {
   const { repo, version, dependencies } = entry;
-  const deps = dependencies.map(dep => `"${dep}"`).join(", ");
+  const deps = dependencies.map((dep) => `"${dep}"`).join(", ");
 
   return `
 with ${entry.name} =
@@ -99,7 +103,6 @@ const runCommand = async (args: CommandArgs) => {
 };
 
 const dhallToJson = async (dhall: string): Promise<unknown> => {
-  
   const res = await runCommand({
     command: "dhall-to-json",
     args: [],
@@ -123,7 +126,9 @@ const getGithubRawUserContent = async (
     const text = await res.text();
     return text;
   } else {
-    throw new Error(`Failed to get latest commit: ${res.status}`);
+    throw new Error(
+      `Failed to get latest commit: ${res.status}, ${res.statusText}`
+    );
   }
 };
 
@@ -165,17 +170,47 @@ const getPackagesDhall = async (repos: Repo[]): Promise<string> => {
     };
 
     entries.push(pkgEntry);
+
+    await delay(500);
   }
 
   return pkgsEntriesToDhall(entries);
 };
 
+// node, check if file exists
+const fileExists = (filePath: string) => {
+  try {
+    fs.statSync(filePath);
+    return true;
+  } catch (err) {
+    return false;
+  }
+};
+
+const writeToLocalRepos = async (
+  dir: string,
+  pkgDhall: string,
+  repos: Repo[]
+) => {
+  for (const repo of repos) {
+    const filePath = `${dir}/purescript-${repo.repoName}/packages.dhall`;
+    if (fileExists(filePath)) {
+      console.error(`Updating ${filePath}`);
+      fs.writeFileSync(filePath, pkgDhall);
+      console.error(`Done`);
+    } else {
+      console.error(`File ${filePath} does not exist, skipping`);
+    }
+  }
+};
+
 const main = async () => {
-  const repos = JSON.parse(fs.readFileSync("./repos.json", "utf8").toString())
+  const repos = JSON.parse(fs.readFileSync("./repos.json", "utf8").toString());
 
   const pkgsDhall = await getPackagesDhall(repos);
+  
+  writeToLocalRepos("..", pkgsDhall, repos);
 
-  console.log(pkgsDhall);
 };
 
 main();
