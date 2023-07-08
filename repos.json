@@ -1,19 +1,20 @@
 [
-  { "user": "thought2", "repoName": "marked", "rev": "main", "private": true },
-  { "user": "thought2", "repoName": "data-mvc", "rev": "main" },
+  { "user": "thought2", "repoName": "purescript-marked", "rev": "main", "private": true },
+  { "user": "thought2", "repoName": "purescript-data-mvc", "rev": "main" },
   
-  { "user": "thought2", "repoName": "ts-bridge", "rev": "recusion" },
+  { "user": "thought2", "repoName": "purescript-ts-bridge", "rev": "main" },
 
-  { "user": "thought2", "repoName": "virtual-dom-react-basic", "rev": "main" },
-  { "user": "thought2", "repoName": "virtual-dom-halogen", "rev": "main" },
-  { "user": "thought2", "repoName": "virtual-dom", "rev": "main" },
+  { "user": "thought2", "repoName": "purescript-virtual-dom-react-basic", "rev": "main" },
+  { "user": "thought2", "repoName": "purescript-virtual-dom-halogen", "rev": "main" },
+  { "user": "thought2", "repoName": "purescript-virtual-dom", "rev": "style-map" },
 
-  { "user": "thought2", "repoName": "labeled-data", "rev": "main" },
-  { "user": "thought2", "repoName": "variant-encodings", "rev": "main" },
-  { "user": "thought2", "repoName": "dts", "rev": "main" },
+  { "user": "thought2", "repoName": "purescript-labeled-data", "rev": "main" },
+  { "user": "thought2", "repoName": "purescript-variant-encodings", "rev": "main" },
+  { "user": "thought2", "repoName": "purescript-dts", "rev": "main" },
 
-  { "user": "thought2", "repoName": "interactive-data-core", "rev": "main", "private": true },
-  { "user": "thought2", "repoName": "data-functions", "rev": "main", "private": true }
-
-
+  { "user": "thought2", "repoName": "purescript-interactive-data-core", "rev": "main" },
+  { "user": "thought2", "repoName": "purescript-interactive-data", "rev": "main", "private": true },
+  { "user": "thought2", "repoName": "purescript-data-functions", "rev": "main", "private": true },
+  { "user": "thought2", "repoName": "purescript-xml-parser", "rev": "main" },
+  { "user": "thought2", "repoName": "purs-virtual-dom-assets", "rev": "main", "private": true }
 ]

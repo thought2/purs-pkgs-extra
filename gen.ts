@@ -145,7 +145,7 @@ const getPackagesDhall = async (repos: Repo[]): Promise<string> => {
   const entries: PkgEntry[] = [];
   for (const repo of repos) {
     console.error(`Fetching ${repo.user}/${repo.repoName}`);
-    const repoPurs = { ...repo, repoName: `purescript-${repo.repoName}` };
+    const repoPurs = { ...repo, repoName: `${repo.repoName}` };
     console.error(`Done`);
 
     console.error(`Get latest commit`);
@@ -193,7 +193,7 @@ const writeToLocalRepos = async (
   repos: Repo[]
 ) => {
   for (const repo of repos) {
-    const filePath = `${dir}/purescript-${repo.repoName}/packages.dhall`;
+    const filePath = `${dir}/${repo.repoName}/packages.dhall`;
     if (fileExists(filePath)) {
       console.error(`Updating ${filePath}`);
       fs.writeFileSync(filePath, pkgDhall);
