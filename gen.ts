@@ -141,7 +141,7 @@ const repoToString = (repo: Repo): string => {
   }
 };
 
-const getPackagesDhall = async (repos: Repo[]): Promise<string> => {
+const getPackagesDhall = async (repos: Repo[]): Promise<PkgEntry[]> => {
   const entries: PkgEntry[] = [];
   for (const repo of repos) {
     console.error(`Fetching ${repo.user}/${repo.repoName}`);
@@ -166,7 +166,7 @@ const getPackagesDhall = async (repos: Repo[]): Promise<string> => {
       repo: repoToString(repo_),
       version: latestCommit,
       dependencies: spagoJson.dependencies,
-      name: repo.repoName,
+      name: repo.repoName.replace(/^purescript-/g, ""),
     };
 
     entries.push(pkgEntry);
@@ -174,7 +174,7 @@ const getPackagesDhall = async (repos: Repo[]): Promise<string> => {
     await delay(500);
   }
 
-  return pkgsEntriesToDhall(entries);
+  return entries;
 };
 
 // node, check if file exists
@@ -189,14 +189,23 @@ const fileExists = (filePath: string) => {
 
 const writeToLocalRepos = async (
   dir: string,
-  pkgDhall: string,
+  pkgDhall: PkgEntry[],
   repos: Repo[]
 ) => {
   for (const repo of repos) {
-    const filePath = `${dir}/${repo.repoName}/packages.dhall`;
+    const repoDir = `${dir}/${repo.repoName}`;
+    const filePath = `${repoDir}/packages.dhall`;
     if (fileExists(filePath)) {
       console.error(`Updating ${filePath}`);
-      fs.writeFileSync(filePath, pkgDhall);
+
+      const neededEntries: Set<string> = getProjectDeps(repoDir);
+
+      const pkgDhallFiltered = pkgDhall.filter((entry) => {
+        return neededEntries.has(entry.name);
+      });
+
+      const pkgDhallStr = pkgsEntriesToDhall(pkgDhallFiltered);
+      fs.writeFileSync(filePath, pkgDhallStr);
       console.error(`Done`);
     } else {
       console.error(`File ${filePath} does not exist, skipping`);
@@ -204,13 +213,29 @@ const writeToLocalRepos = async (
   }
 };
 
+const getProjectDeps = (repoDir: string): Set<string> => {
+  const lines: string = cp
+    .spawnSync("spago", ["ls", "deps", "--json"], { cwd: repoDir })
+    .stdout.toString()
+    .trim();
+
+  const neededEntries = new Set<string>();
+  lines.split("\n").forEach((str) => {
+    const entry = JSON.parse(str) as { packageName: string };
+    neededEntries.add(entry.packageName);
+  });
+
+  return neededEntries;
+};
+
 const main = async () => {
-  const repos = JSON.parse(fs.readFileSync("./repos.json", "utf8").toString());
+  const repos: Repo[] = JSON.parse(
+    fs.readFileSync("./repos.json", "utf8").toString()
+  );
 
-  const pkgsDhall = await getPackagesDhall(repos);
-  
+  const pkgsDhall: PkgEntry[] = await getPackagesDhall(repos);
+
   writeToLocalRepos("..", pkgsDhall, repos);
-
 };
 
 main();
