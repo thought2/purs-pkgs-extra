@@ -198,6 +198,9 @@ const writeToLocalRepos = async (
     if (fileExists(filePath)) {
       console.error(`Updating ${filePath}`);
 
+      const pkgDhallStrAll = pkgsEntriesToDhall(pkgDhall);
+      fs.writeFileSync(filePath, pkgDhallStrAll);
+      
       const neededEntries: Set<string> = getProjectDeps(repoDir);
 
       const pkgDhallFiltered = pkgDhall.filter((entry) => {
@@ -206,6 +209,7 @@ const writeToLocalRepos = async (
 
       const pkgDhallStr = pkgsEntriesToDhall(pkgDhallFiltered);
       fs.writeFileSync(filePath, pkgDhallStr);
+
       console.error(`Done`);
     } else {
       console.error(`File ${filePath} does not exist, skipping`);
@@ -215,7 +219,9 @@ const writeToLocalRepos = async (
 
 const getProjectDeps = (repoDir: string): Set<string> => {
   const lines: string = cp
-    .spawnSync("spago", ["ls", "deps", "--json"], { cwd: repoDir })
+    .spawnSync("spago", ["ls", "deps", "--transitive", "--json"], {
+      cwd: repoDir,
+    })
     .stdout.toString()
     .trim();
 
